@@ -16,7 +16,7 @@ const express = require("express");
 const cors = require("cors");
 const connectdb = require("./config/db");
 const chatRoutes = require("./routes/chatRoutes");
-
+const authroutes=require("./routes/authroutes");
 const app = express();
 
 // Middleware: allow cross-origin requests (so the React frontend can call this API)
@@ -26,7 +26,7 @@ app.use(express.json());
 
 // Connect to MongoDB
 connectdb();
-
+app.use("/auth", authroutes);
 // Mount all chat routes under /chat
 app.use("/chat", chatRoutes);
 

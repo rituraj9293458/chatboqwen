@@ -15,16 +15,23 @@ const mongoose = require("mongoose");
 
 const messageSchema = new mongoose.Schema(
     {
-        // "user" = the human typed this, "ai" = the LLM generated this
+        username:{
+            type:String,
+            required:true
+        },
+        password:{
+            type:String,
+            required:true
+        },
         role: {
             type: String,
             enum: ["user", "ai"],
-            required: true,
+            
         },
         // The actual message content
         text: {
             type: String,
-            required: true,
+            
         },
     },
     {

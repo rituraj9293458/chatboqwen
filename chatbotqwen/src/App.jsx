@@ -1,24 +1,28 @@
-import ChatInput from "./components/chatinput";
-import { useState } from "react";
-import Headers from "./components/headersnlogo";
-import Window from "./components/chatwindow";
+import { Routes, Route } from "react-router-dom";
+
+import Login from "./components/Login";
+import ChatPage from "./components/ChatPage";
 
 function App() {
-    const [message, setMessage] = useState("");
-    const [msgHist, setMsgHist] = useState([]);
 
     return (
-        <div>
-            <Headers />
-            <Window msgHist={msgHist} setMsgHist={setMsgHist} />
-            <ChatInput
-                message={message}
-                setMessage={setMessage}
-                msgHist={msgHist}
-                setMsgHist={setMsgHist}
+
+        <Routes>
+
+            <Route
+                path="/"
+                element={<Login />}
             />
-        </div>
+
+            <Route
+                path="/chat"
+                element={<ChatPage />}
+            />
+
+        </Routes>
+
     );
+
 }
 
 export default App;
