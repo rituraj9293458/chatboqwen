@@ -4,9 +4,10 @@ function Window(props) {
     useEffect(() => {
         async function loadMessages() {
             try {
-                const response = await fetch("http://localhost:7000/chat");
+                const username = props.username;
+                const response = await fetch(`http://localhost:7000/chat?username=${encodeURIComponent(username)}`);
                 const data = await response.json();
-                props.setMsgHist(data);
+                props.setMsgHist(data || []);
             } catch (err) {
                 console.log(err);
             }

@@ -30,19 +30,11 @@ function Login() {
         );
 
         if (res.ok) {
-
-            navigate("/chat");
-
+            navigate("/chat", { state: { username: name } });
         } else {
-
             alert("Wrong credentials");
-
         }
 
-    }
-    async function Handlesignup()
-    {
-        
     }
     return (
 
@@ -67,7 +59,9 @@ function Login() {
                 Login
 
             </button>
-            <button onClick={Handlesignup}>sign up</button>
+             <button type="button" onClick={() => navigate("/signup")}>
+            Sign Up
+        </button>
 
         </form>
 

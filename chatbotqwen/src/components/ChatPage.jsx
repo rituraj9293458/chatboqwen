@@ -3,8 +3,12 @@ import Headers from "./headersnlogo";
 import Window from "./chatwindow";
 
 import { useState } from "react";
+import { useLocation } from "react-router-dom";
 
 function ChatPage() {
+
+    const location = useLocation();
+    const username = location.state?.username || "";
 
     const [message,setMessage]=useState("");
 
@@ -22,6 +26,8 @@ function ChatPage() {
 
                 setMsgHist={setMsgHist}
 
+                username={username}
+
             />
 
             <ChatInput
@@ -33,6 +39,8 @@ function ChatPage() {
                 msgHist={msgHist}
 
                 setMsgHist={setMsgHist}
+
+                username={username}
 
             />
 

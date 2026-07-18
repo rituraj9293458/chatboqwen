@@ -14,16 +14,16 @@ function ChatInput(props) {
 
         const userText = props.message;
         
-        // 1. Optimistically show the user's message immediately
         props.setMsgHist((prev) => [
             ...prev,
             { role: "user", text: userText, _id: Date.now() }
         ]);
         
-        // 2. Clear the input immediately so the user doesn't feel stuck
+        
         props.setMessage("");
 
         try {
+            const username = props.username;
             const response = await fetch("http://localhost:7000/chat", {
                 method: "POST",
                 headers: {
@@ -31,20 +31,19 @@ function ChatInput(props) {
                 },
                 body: JSON.stringify({
                     text: userText,
-                    role: "user"
+                    role: "user",
+                    username: username
                 })
             });
 
             const data = await response.json();
 
-            // 3. Update the history with the final confirmed conversation from the server
-            //    (This will replace the optimistic user message with the real one from DB,
-            //     and also append the AI's response)
+           
             if (data.conversation) {
                 props.setMsgHist(data.conversation);
             } else if (data.userMessage && data.aiMessage) {
                 props.setMsgHist((prev) => [
-                    ...prev.filter(m => m._id !== userText), // fallback
+                    ...prev.filter(m => m._id !== userText),
                     data.userMessage,
                     data.aiMessage
                 ]);
