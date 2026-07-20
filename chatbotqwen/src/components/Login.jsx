@@ -37,34 +37,33 @@ function Login() {
 
     }
     return (
+        <div className="auth-container">
+            <div className="auth-card">
+                <h1 className="auth-title">Welcome Back</h1>
+                <form onSubmit={handleLogin} style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+                    <input
+                        type="text"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                        placeholder="Name"
+                    />
 
-        <form onSubmit={handleLogin}>
+                    <input
+                        type="password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        placeholder="Password"
+                    />
 
-            <input
-                type="text"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                placeholder="Name"
-            />
-
-            <input
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="Password"
-            />
-
-            <button>
-
-                Login
-
-            </button>
-             <button type="button" onClick={() => navigate("/signup")}>
-            Sign Up
-        </button>
-
-        </form>
-
+                    <button type="submit">
+                        Login
+                    </button>
+                    <button type="button" className="btn-secondary" onClick={() => navigate("/signup")}>
+                        Sign Up
+                    </button>
+                </form>
+            </div>
+        </div>
     );
 
 }

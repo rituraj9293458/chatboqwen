@@ -17,11 +17,14 @@ function Window(props) {
     }, []);
 
     return (
-        <div>
+        <div className="chat-window">
             {props.msgHist.map((msg, index) => (
-                <p key={msg._id ?? `${msg.role}-${index}`}>
-                    <b>{msg.role} :</b> {msg.text}
-                </p>
+                <div key={msg._id ?? `${msg.role}-${index}`} className={`message-wrapper ${msg.role === 'user' ? 'user' : 'ai'}`}>
+                    <div className="message-content">
+                        <div className="message-sender">{msg.role === 'user' ? props.username || 'You' : 'Qwen AI'}</div>
+                        <div className="message-bubble">{msg.text}</div>
+                    </div>
+                </div>
             ))}
         </div>
     );

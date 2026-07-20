@@ -28,22 +28,30 @@ function Signup() {
     }
 
     return (
-        <form onSubmit={HandleSubmit}>
-            <input
-                value={username}
-                onChange={(e) => setuserName(e.target.value)}
-                placeholder="Username"
-            />
+        <div className="auth-container">
+            <div className="auth-card">
+                <h1 className="auth-title">Create Account</h1>
+                <form onSubmit={HandleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+                    <input
+                        value={username}
+                        onChange={(e) => setuserName(e.target.value)}
+                        placeholder="Username"
+                    />
 
-            <input
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="Password"
-            />
+                    <input
+                        type="password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        placeholder="Password"
+                    />
 
-            <button type="submit">Signup</button>
-        </form>
+                    <button type="submit">Signup</button>
+                    <button type="button" className="btn-secondary" onClick={() => navigate("/")}>
+                        Back to Login
+                    </button>
+                </form>
+            </div>
+        </div>
     );
 }
 

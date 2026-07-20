@@ -14,38 +14,24 @@ function ChatPage() {
 
     const [msgHist,setMsgHist]=useState([]);
 
-    return(
-
-        <div>
-
-            <Headers/>
-
-            <Window
-
-                msgHist={msgHist}
-
-                setMsgHist={setMsgHist}
-
-                username={username}
-
-            />
-
-            <ChatInput
-
-                message={message}
-
-                setMessage={setMessage}
-
-                msgHist={msgHist}
-
-                setMsgHist={setMsgHist}
-
-                username={username}
-
-            />
-
+    return (
+        <div className="app-layout">
+            <div className="chat-container">
+                <Headers />
+                <Window
+                    msgHist={msgHist}
+                    setMsgHist={setMsgHist}
+                    username={username}
+                />
+                <ChatInput
+                    message={message}
+                    setMessage={setMessage}
+                    msgHist={msgHist}
+                    setMsgHist={setMsgHist}
+                    username={username}
+                />
+            </div>
         </div>
-
     );
 
 }

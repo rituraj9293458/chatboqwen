@@ -54,24 +54,21 @@ function ChatInput(props) {
     }
 
     return (
-
-        <form onSubmit={HandleSubmit}>
-
-            <input
-                type="text"
-                value={props.message}
-                onChange={HandleChange}
-                placeholder="Enter message"
-            />
-
-            <button>
-
-                Send
-
-            </button>
-
-        </form>
-
+        <div className="chat-input-area">
+            <form onSubmit={HandleSubmit} className="input-form">
+                <input
+                    type="text"
+                    value={props.message}
+                    onChange={HandleChange}
+                    placeholder="Message Qwen AI..."
+                />
+                <button type="submit">
+                    <svg className="send-icon" viewBox="0 0 24 24">
+                        <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"></path>
+                    </svg>
+                </button>
+            </form>
+        </div>
     );
 
 }
