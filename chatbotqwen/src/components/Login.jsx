@@ -1,6 +1,5 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-
 function Login() {
 
     const navigate = useNavigate();
@@ -28,9 +27,15 @@ function Login() {
                 })
             }
         );
+        const data= await res.json();
+
 
         if (res.ok) {
+            localStorage.setItem("token",data.token);
+
             navigate("/chat", { state: { username: name } });
+            
+
         } else {
             alert("Wrong credentials");
         }

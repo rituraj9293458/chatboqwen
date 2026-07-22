@@ -24,10 +24,12 @@ function ChatInput(props) {
 
         try {
             const username = props.username;
+            const token = localStorage.getItem("token");
             const response = await fetch("http://localhost:7000/chat", {
                 method: "POST",
                 headers: {
-                    "Content-Type": "application/json"
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`
                 },
                 body: JSON.stringify({
                     text: userText,

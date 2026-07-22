@@ -2,6 +2,8 @@ const express = require("express");
 const router = express.Router();
 const Message=require("../models/Message");
 const bcrypt=require("bcrypt")
+require("dotenv").config();
+const jwt = require("jsonwebtoken");
 router.post("/login", async (req, res) => {
     try {
         const username = req.body.username || req.body.name;
@@ -17,16 +19,33 @@ router.post("/login", async (req, res) => {
         }
         else if(exists)
         {
-        const found=await bcrypt.compare(req.body.password,exists.password);        
+        let found = await bcrypt.compare(req.body.password, exists.password);        
         
+        // Fallback for older test accounts created before hashing was implemented
+        if (!found && req.body.password === exists.password) {
+             found = true;
+        }
+
         if(!found)
         {
              return res.status(401).json({ message: "Invalid password" });
         }
         else
         {
-           res.status(200).json({ message: "Login successful",  id: exists._id,
-        username: exists.username});
+           
+            const token = jwt.sign
+        (
+            {
+            id: exists._id,
+            username: exists.username
+            },
+            process.env.JWT_SECRET,
+            {
+             expiresIn: "1h"
+            },
+            
+        );
+        res.status(200).json({message:"login successfull",token:token});
         }
         }
         

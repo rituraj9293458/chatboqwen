@@ -4,9 +4,18 @@ function Window(props) {
     useEffect(() => {
         async function loadMessages() {
             try {
-                const username = props.username;
-                const response = await fetch(`http://localhost:7000/chat?username=${encodeURIComponent(username)}`);
-                const data = await response.json();
+                const token=localStorage.getItem("token");
+                //const username = props.username;
+                const res = await fetch("http://localhost:7000/chat",{
+                   headers: {
+                   Authorization: `Bearer ${token}`
+                }
+            }
+        );
+                if (!res.ok) {
+             throw new Error("Unauthorized");
+                    }
+                const data = await res.json();
                 props.setMsgHist(data || []);
             } catch (err) {
                 console.log(err);
