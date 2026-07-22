@@ -9,7 +9,10 @@ function Signup() {
 
     async function HandleSubmit(e) {
         e.preventDefault();
-
+         if (!username || !password) {
+        alert("Username and password are required");
+        return;
+           } 
         const response = await fetch("http://localhost:7000/auth/signup", {
             method: "POST",
             headers: {
